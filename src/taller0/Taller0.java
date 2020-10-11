@@ -15,12 +15,16 @@ public class Taller0 {
         
         }
              
-    }
+    }   
     
+    public static void desplegarCamiones(String[] vecPatente,String[] vecMarca,double[] vecKilometraje,int contPatente){
+        for(int i=0; i <contPatente;i++){
+            StdOut.println(vecPatente[i]+","+vecMarca[i]+","+vecKilometraje[i]);
         
-    
-    
-    //Subprograma para leer el archivo de texto Trabajadores
+        }
+             
+    }   
+//Subprograma para leer el archivo de texto Trabajadores
     public static int leerTrabajadores(String[] vecRut,String[] vecNombre,String[] vecApellido,String[] vecClave) throws IOException{
        int contRut = 0;
        ArchivoEntrada arch1 = new ArchivoEntrada("Trabajadores.txt");
@@ -37,72 +41,93 @@ public class Taller0 {
         return contRut;
     }
     
-    
-     
-     
-    
-    public static int leerComputadores(int[] vecCodigo,String[] vecMarca,String[] vecModelo,int[] vecPrecios,int[] vecStock) throws IOException{
-        int contComputadores = 0;
-        ArchivoEntrada arch1 = new ArchivoEntrada("computadores.txt");
+    public static int leerCamiones(String[] vecPatente,String[] vecMarca, double[] vecKilometraje) throws IOException{
+        int contPatente = 0;
+        ArchivoEntrada arch1 = new ArchivoEntrada("Camiones.txt");
         while(!arch1.isEndFile()){
             Registro regEnt = arch1.getRegistro();
-            int codigo = regEnt.getInt();
-            String marca = regEnt.getString();
-            String modelo = regEnt.getString();
-            int precios = regEnt.getInt();
-            int stock = regEnt.getInt();
             
-            if (precios >=250000 && precios <=1000000){
-                vecCodigo[contComputadores] = codigo;
-                vecMarca[contComputadores]= marca;
-                vecModelo[contComputadores]=modelo;
-                vecPrecios[contComputadores]=precios;
-                vecStock[contComputadores]=stock;
-                contComputadores++;
-            }
+            vecPatente[contPatente] =regEnt.getString();
+            vecMarca[contPatente] =regEnt.getString();
+            vecKilometraje[contPatente] =regEnt.getDouble();
+            contPatente++;
         
         }
         arch1.close();
-        return contComputadores;
+        return contPatente;
     }
         
     // Subprograma para leer el archivo de texto cupones
-    public static int leerCupones(int[] vecCupones,int[] vecDescuentos) throws IOException{
-        int contCupones = 0;
-        ArchivoEntrada arch1 = new ArchivoEntrada("cupones.txt");
+    public static int leerEntregas(int[] vecCodigo,String[] vecMercancia,double[] vecKilos) throws IOException{
+        int contCodigos = 0;
+        ArchivoEntrada arch1 = new ArchivoEntrada("Entregas.txt");
         while(!arch1.isEndFile()){
             Registro regEnt = arch1.getRegistro();
-            int cupon = regEnt.getInt();
-            int descuento = regEnt.getInt();
+            int codigo = regEnt.getInt();
+            String mercancia = regEnt.getString();
+            double kilos = regEnt.getDouble();            
             
-            if (descuento >=10000 && descuento <=50000){
-                vecCupones[contCupones] = cupon;
-                vecDescuentos[contCupones]= descuento;
-                contCupones++;
+            if (codigo >=0 && codigo <=99999 && kilos >= 0){
+                vecCodigo[contCodigos] = codigo;
+                vecMercancia[contCodigos]= mercancia;
+                vecKilos[contCodigos]= kilos;
+                contCodigos++;
             }
         }
         arch1.close();
-        return contCupones;
+        return contCodigos;
+    }
+    
+    public static int leerCiudades(String[] vecCiudad, double[] vecDistancia) throws IOException{
+        int contCiudades = 0;
+        ArchivoEntrada arch1 = new ArchivoEntrada("Ciudades.txt");
+        while(!arch1.isEndFile()){
+            Registro regEnt = arch1.getRegistro();
+            String ciudad = regEnt.getString();
+            double distancia = regEnt.getDouble();            
+            
+            if (distancia >=0){
+                vecCiudad[contCiudades] = ciudad;
+                vecDistancia[contCiudades]= distancia;
+                contCiudades++;
+            }
+        }
+        arch1.close();
+        return contCiudades;
     }
     
     public static void main(String[] args) throws IOException {
-        
+        //Leyendo  datos de los trabajadores
         String[] vecRut = new String[999];
         String[] vecNombre = new String[999];
         String[] vecApellido = new String[999];
         String[] vecClave = new String[999];
-        //leyendo datos computador
-        int[] vecCodigo = new int[999];
+        
+        //leyendo datos de los camiones
+        String[] vecPatente = new String[999];
         String[] vecMarca = new String[999];
-        String[] vecModelo = new String[999];
-        double b = 3.5;
-        int c = 2;
-        double d = 0;
-        d = d + b + c;
-        StdOut.println("Suma es :" + d);
+        double[] vecKilometraje = new double[999];
+        
+       //Leyendo datos de las entregas
+        int[] vecCodigo = new int[999];
+        String[] vecMercancia = new String[999];
+        double[] vecKilos = new double[999];
+       
+       //Leyendo datos de las ciudades
+       String[] vecCiudad =  new String[999];
+       double[] vecDistancia = new double [999];
+       
         
         int contRut= leerTrabajadores(vecRut,vecNombre,vecApellido,vecClave); 
-        desplegarClientes(vecRut,vecNombre,vecApellido,vecClave,contRut);
+        int contPatente= leerCamiones(vecPatente,vecMarca,vecKilometraje);
+        int contCodigos= leerEntregas(vecCodigo,vecMercancia,vecKilos);
+        int contCiudad= leerCiudades(vecCiudad,vecDistancia);
+        
+        //desplegarClientes(vecRut,vecNombre,vecApellido,vecClave,contRut);
+        //desplegarCamiones(vecPatente,vecMarca,vecKilometraje,contPatente);
+        //desplegarEntregas(vecCodigo,vecMercancia,vecKilos,contCodigos);
+        //desplegarCiudades(vecCiudad,vecDistancia,contCiudad);
+        
     }
     
 }
