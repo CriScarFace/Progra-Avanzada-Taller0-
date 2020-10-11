@@ -166,6 +166,8 @@ public class Taller0 {
         }
         
         
+        StdOut.println("HOLA MUNDO");
+        StdOut.println("xD");        
     
 }
     
