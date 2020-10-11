@@ -24,13 +24,30 @@ public class Taller0 {
         }
              
     }   
+    
+    public static void desplegarEntregas(int[] vecCodigo,String[] vecMercancia,double[] vecKilos,int contCodigos){
+        for(int i=0; i <contCodigos;i++){
+            StdOut.println(vecCodigo[i]+","+vecMercancia[i]+","+vecKilos[i]);
+        
+        }
+             
+    }
+    
+    public static void desplegarCiudades(String[] vecCiudad,double[] vecDistancia,int contCiudades){
+        for(int i=0; i <contCiudades;i++){
+            StdOut.println(vecCiudad[i]+","+vecDistancia[i]);
+        
+        }
+             
+    }
+    
 //Subprograma para leer el archivo de texto Trabajadores
     public static int leerTrabajadores(String[] vecRut,String[] vecNombre,String[] vecApellido,String[] vecClave) throws IOException{
        int contRut = 0;
        ArchivoEntrada arch1 = new ArchivoEntrada("Trabajadores.txt");
        while(!arch1.isEndFile()){
            Registro regEnt = arch1.getRegistro();
-            
+                       
            vecRut[contRut] = regEnt.getString();
            vecNombre[contRut] = regEnt.getString();
            vecApellido[contRut] = regEnt.getString();
@@ -127,7 +144,29 @@ public class Taller0 {
         //desplegarCamiones(vecPatente,vecMarca,vecKilometraje,contPatente);
         //desplegarEntregas(vecCodigo,vecMercancia,vecKilos,contCodigos);
         //desplegarCiudades(vecCiudad,vecDistancia,contCiudad);
+        String rut = "null";
+        String opcion = "null";
+        String salir = "null";
         
-    }
+        
+        while(!rut.equals("fin") && !opcion.equals("4")){
+            StdOut.println("Ingrese su rut : ");
+            rut = StdIn.readString();
+            
+            if(rut.equals("admin")){
+                StdOut.println("Ingrese una opcion : ");
+                
+                opcion = StdIn.readString();
+                while (!opcion.equals("1") && !opcion.equals("2") && !opcion.equals("3") && !opcion.equals("4") && !opcion.equals("5")){
+                        StdOut.print("ERROR!!! Ingrese una opcion valida: ");
+                        opcion=StdIn.readString();
+                    }
+                
+            }
+        }
+        
+        
+    
+}
     
 }
